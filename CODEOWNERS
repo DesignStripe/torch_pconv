@@ -1,0 +1,11 @@
+# Lines starting with '#' are comments.
+# Each line is a file pattern followed by one or more owners.
+
+# More infos at https://github.blog/2017-07-06-introducing-code-owners/
+# and 
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# This is a wildcard pattern that means we have to review every filetypes
+# When the dev team will grow, we'll remove that and replace it with 
+# specific filetypes/paths relevant to different people
+*       @sam1902
