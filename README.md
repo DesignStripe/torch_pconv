@@ -1,6 +1,6 @@
 # Torch Pconv
 
-[![PyPI version](https://badge.fury.io/py/torch_pconv.svg)](https://badge.fury.io/py/torch_pconv)
+[![PyPI version](https://badge.fury.io/py/torch-pconv.svg)](https://badge.fury.io/py/torch-pconv)
 
 Faster and more memory efficient implementation of the Partial Convolution 2D layer in PyTorch equivalent to the
 standard Nvidia implementation.
