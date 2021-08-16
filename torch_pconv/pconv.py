@@ -8,9 +8,11 @@
 
 from tensor_type import Tensor4d, Tensor3d, Tensor
 import math
-from typing import Tuple, Any
+from typing import Tuple, Union
 import torch
 from torch import nn
+
+TupleInt = Union[int, Tuple[int, int]]
 
 
 class PConv2d(nn.Module):
@@ -18,10 +20,10 @@ class PConv2d(nn.Module):
         self,
         in_channels: int,
         out_channels: int,
-        kernel_size: int = 1,
-        stride: int = 1,
-        padding: int = 0,
-        dilation: int = 1,
+        kernel_size: TupleInt = 1,
+        stride: TupleInt = 1,
+        padding: TupleInt = 0,
+        dilation: TupleInt = 1,
         bias: bool = False,
         legacy_behaviour: bool = False,
     ):
@@ -48,10 +50,10 @@ class PConv2d(nn.Module):
 
         self.in_channels = in_channels
         self.out_channels = out_channels
-        self.kernel_size = self._to_tuple(kernel_size)
-        self.stride = self._to_tuple(stride)
-        self.padding = self._to_tuple(padding)
-        self.dilation = self._to_tuple(dilation)
+        self.kernel_size = self._to_int_tuple(kernel_size)
+        self.stride = self._to_int_tuple(stride)
+        self.padding = self._to_int_tuple(padding)
+        self.dilation = self._to_int_tuple(dilation)
         self.use_bias = bias
 
         conv_kwargs = dict(
@@ -83,6 +85,7 @@ class PConv2d(nn.Module):
 
         # the mask convolution should be a constant operation
         torch.nn.init.constant_(self.mask_conv.weight, 1.0)
+
         for param in self.mask_conv.parameters():
             param.requires_grad = False
 
@@ -194,7 +197,7 @@ class PConv2d(nn.Module):
         return mask_ratio, update_mask
 
     @staticmethod
-    def _to_tuple(v: Any) -> Tuple[Any, Any]:
+    def _to_int_tuple(v: TupleInt) -> Tuple[int, int]:
         if not isinstance(v, tuple):
             return v, v
         else:
