@@ -8,7 +8,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="torch_pconv",
-    version="0.1.0",
+    version="0.1.1",
     packages=["torch_pconv"],
     description="Faster and more memory efficient implementation of the Partial Convolution 2D"
                 " layer in PyTorch equivalent to the standard NVidia implem.",
